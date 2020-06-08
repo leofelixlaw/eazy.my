@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import fetchProducts from './store/actions/fetchProducts';
+import Header from './components/Header'
+class App extends Component {
+  componentDidMount() {
+    this.props.fetchProducts()
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+
+        <br />
+        {this.props.products.length === 0 ?
+          <p>THERE ARE NO USERS</p> :
+          this.props.products.map(product => 
+          <p key={product.id}>{product.attributes.title} {product.attributes.links.image}</p>
+          )}
+        <br />
+      </div>
+    )
+  }
 }
 
-export default App;
+//Make State accessible to movies and users in App.
+const MapStateToProps = (state) => {
+  return {
+    products: state.products
+  };
+};
+
+// Setup Dispatch for our button events. 
+const MapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => dispatch(fetchProducts)
+  };
+};
+
+export default connect(MapStateToProps, MapDispatchToProps)(App)
