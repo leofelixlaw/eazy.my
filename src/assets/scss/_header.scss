@@ -1,0 +1,29 @@
+// _variable.scss
+header {
+  box-shadow: 0px 3px 6px rgba($black, 0.16);
+  background-color: $white;
+  .navbar {
+    padding-left: 0;
+  }
+}
+
+.logo {
+  color: $theme;
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+  top: -4px;
+  padding-right: 20px;
+
+  small {
+    font-size: 18px;
+  }
+  &:hover{
+    text-decoration: none;
+    color: $theme;
+  }
+}
+
+.nav-item {
+  padding: 0 15px;
+}
