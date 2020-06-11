@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSingleProduct } from '../actions/index';
+import ProductItemFullComponent from '../components/ProductItemFullProductList.component';
 import ErrorInfo from '../components/ErrorInfo';
 
 const mapStateToProps = state => {
@@ -19,33 +20,44 @@ class ProductItemFull extends Component {
     getSingleProduct(id);
   }
 
+  renderDummy() {
+    return (
+      <div>
+        <div className="row">
+          <div className="col-sm-6 col-md-8">
+              <div className="loading loading-title"></div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-6 col-md-8">
+              <div className="loading loading-details"></div>
+          </div>
+          <div className="col-sm-6 col-md-4">
+              <div className="loading loading-details"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  renderProduct(item) {
+    if(Object.keys(item).length !== 0){
+      return (
+        <ProductItemFullComponent product={item}/>
+        // this.renderDummy()
+      )
+    }
+  }
+
   render() {
     const { product, isError } = this.props;
-
     if(isError) {
       return <ErrorInfo />
     }
-    
-    const pairing = product.food_pairing  &&
-      (
-        <ul className='product-pairing'>
-          {product.food_pairing.map( (f, i) => <li className='product-pairing-item' key={i}>{f}</li>)}
-        </ul>
-      )
-
     return (
       <div className='product-item-full'>
-        <img className='product-img-full' src={product.image_url} alt={`${product.name}'s bottle`}/>
         <div className="product-details">
-          <h1 className='product-name'>{product.name}</h1>
-          <p className='product-tagline'>{product.tagline}</p>
-          <p className='product-description'>{product.description}</p>
-          <p className='product-tips'>{product.brewers_tips}</p>
-          <h3 className='product-pairing-head'>Pairing food:</h3>
-          <ul>
-            {pairing}
-          </ul>
-          <small className='product-contributed'>Contributed by: {product.contributed_by}</small>
+         {this.renderProduct(product)}
         </div>
       </div>
     )

@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from 'react-router-dom';
 
-const ProductItem = ({ product }) => {
+const ProductListComponent = ({ product }) => {
 
   return (
-    <div className="col mb-4 card-product">
-      <Link className="card h-100" to={`/${product.id}`}>
+    <Link className="card-product-item" to={`/${product.id}`}>
+      <div className="card">
         <div className="card-img-wrap">
         {/* {
           product.image_url ? 
@@ -19,13 +19,13 @@ const ProductItem = ({ product }) => {
           <p className="card-text text-truncate text-truncate-2lines mb-3">{product.attributes.title}</p>
           <h5 className="price mb-0">{product.attributes.price}</h5>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
    )
 }
 
-ProductItem.propTypes = {
+ProductListComponent.propTypes = {
   product: PropTypes.object.isRequired,
 };
 
-export default ProductItem;
+export default ProductListComponent;

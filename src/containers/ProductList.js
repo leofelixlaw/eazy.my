@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import ProductItem from '../components/ProductItem';
+import ProductListComponent from '../components/ProductList.component';
 import { getProducts } from '../actions/index';
 
 const mapStateToProps = state => {
@@ -18,26 +18,44 @@ class ProductList extends Component {
       page: 1
     }
   }
+
   componentDidMount() {
     const { getProducts } = this.props;
     getProducts();
+    document.body.classList.add("bg-color");
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove("bg-color");
   }
 
 
+  // Dummy loader element
+  renderDummy() {
+    return (
+      [...Array(30).keys()].map((item, key) =>
+      <div key={key} className="loading"></div>)
+    );
+  }
+
+  // Render product Lists
   render() {
     const { productList, isError } = this.props;
-
     return (
       <div className="card-product">
-        <h4 className="text-uppercase mb-4">Listing</h4>
-        <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6">
-          {productList.map( (product, i) => (
-            <ProductItem product={product}  key={i}/>
-          ))} 
+        <h4 className="text-uppercase mb-4 ml-3">Listing</h4>
+        <div className="card-product-container">
+          {
+            productList.length === 0 ?  this.renderDummy() : productList.map( (product, i) => (
+              <ProductListComponent product={product} key={i}/>
+            ))
+          }
         </div>
 
         {isError &&
-          <button className='btn-more' onClick={this.loadMore}>Ooops! Try again</button>
+          <div class="alert alert-danger" role="alert">
+            Something went wrong
+          </div>
         }
       </div>
       

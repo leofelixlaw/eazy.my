@@ -1,0 +1,90 @@
+// ../_variable.scss
+
+.product-details-{
+  &image{
+    height: 100%;
+    img{
+      width: 100%;
+    }
+    .card-body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &.card{
+      border-color: $border-color;
+    }
+  }
+  &content{
+    height: 100%;
+    .card{
+      border-color: $border-color;
+    }
+    .card-header{
+      border: 0;
+      a{
+        color: $text-light;
+        font-size: 14px;
+      }
+      img{
+        height: 20px;
+      }
+    }
+    .form-group{
+      label{
+        font-size: 12px;
+        color: $text-light;
+        margin-bottom: 3px;
+      }
+    }
+    .card-footer{
+      border-color: $border-color;
+      .btn{
+        text-align: left;
+        border-radius: 5px;
+        &:hover{
+          img{
+            filter: brightness(0) invert(1);
+          }
+        }
+      }
+      @include media-breakpoint-only(xs) { 
+        position: fixed;
+        width: 100%;
+        padding: 10px;
+        background: $white;
+        left: 0;
+        bottom: 0;
+        box-shadow: 0px -4px 0 rgba(black, 0.09);
+        border: 0;
+      }
+    }
+    @include media-breakpoint-only(xs) { 
+      .card{
+        margin-bottom: 90px;
+      }
+      .btn{
+        width: auto;
+        margin-top: 0;
+      }
+      .contact-action{
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .contact-action{
+        img{
+          width: 18px;
+        }
+        .btn{
+          padding: 0.25rem 0.5rem;
+          font-size: 0.875rem;
+          line-height: 1.5;
+          border-radius: 0.2rem;
+        }
+      }
+    }
+  }
+}
