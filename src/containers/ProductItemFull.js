@@ -20,6 +20,7 @@ class ProductItemFull extends Component {
     getSingleProduct(id);
   }
 
+  // Dummy loader element
   renderDummy() {
     return (
       <div>
@@ -40,6 +41,7 @@ class ProductItemFull extends Component {
     );
   }
   
+  // Render product item
   renderProduct(item) {
     if(Object.keys(item).length !== 0){
       return (
